@@ -47,7 +47,7 @@ export const Wish = () => {
         ) : (
           <div
             className="h-full py-4 px-6 flex flex-col items-center justify-center relative"
-            style={{ backgroundColor: "#10114C" }}
+            style={{ backgroundColor: "#10114c95" }}
           >
             <Player
               autoplay

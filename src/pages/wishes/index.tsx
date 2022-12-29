@@ -36,6 +36,10 @@ export const Wishes = () => {
     navigate("/wishes/screen");
   };
 
+  useEffect(() => {
+    const timeOut = window.setTimeout(() => navHandler(), 5000);
+    return () => window.clearTimeout(timeOut);
+  }, []);
   if (error)
     return (
       <Container>

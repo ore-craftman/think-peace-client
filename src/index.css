@@ -32,6 +32,159 @@ code {
   left: 0;
 }
 
+.notification-card {
+  position: relative;
+  animation-name: notification-card-motion;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes notification-card-motion {
+  0% {
+    top: -10px;
+    /* opacity: 0.6; */
+  }
+  25% {
+    top: -7px;
+    /* opacity: 0.8; */
+  }
+  50% {
+    top: -4px;
+    /* opacity: 0.9; */
+  }
+  25% {
+    top: 0px;
+    /* opacity: full; */
+  }
+}
+
+@keyframes notification-card-scroll {
+  0% {
+    top: -10vh;
+  }
+  10% {
+    top: 10vh;
+    opacity: 0.9;
+  }
+  20% {
+    top: 20vh;
+    opacity: 0.8;
+  }
+  30% {
+    top: 30vh;
+    opacity: 0.7;
+  }
+  40% {
+    top: 40vh;
+    opacity: 0.6;
+  }
+  50% {
+    top: 50vh;
+    opacity: 0.5;
+  }
+  60% {
+    top: 60vh;
+    opacity: 0.4;
+  }
+  70% {
+    top: 70vh;
+    opacity: 0.3;
+  }
+  80% {
+    top: 80vh;
+    opacity: 0.2;
+  }
+  90% {
+    top: 90vh;
+    opacity: 0.1;
+  }
+  100% {
+    top: 100vh;
+    opacity: 0;
+    /* height: 0px !important;
+    width: 0px !important; */
+  }
+}
+
+ul.fireflies {
+  list-style: none;
+}
+
+li {
+  background-size: cover;
+  background-image: url(http://i.imgur.com/aa7Rw.png);
+  width: 25px;
+  top: -20px;
+  height: 25px;
+  position: absolute;
+  animation: leftright 24s infinite cubic-bezier(0.39, 0, 0.63, 1),
+    updown 8s infinite 1.25s cubic-bezier(0.39, 0, 0.63, 1);
+}
+li:nth-of-type(2) {
+  animation-delay: 4s;
+  animation-duration: 17s, 8s;
+  animation-fill-mode: backwards, backwards;
+}
+li:nth-of-type(3) {
+  animation-delay: 1.5s;
+  animation-duration: 14s, 7s;
+  animation-fill-mode: backwards, backwards;
+}
+li:nth-of-type(4) {
+  animation-delay: 5.5s;
+  animation-duration: 10s, 13s;
+}
+li:nth-of-type(5) {
+  animation-fill-mode: backwards, backwards;
+  animation-duration: 12s, 15s;
+}
+
+@keyframes leftright {
+  0%,
+  100% {
+    left: 20%;
+  }
+  16.666% {
+    left: 90%;
+  }
+  33.333% {
+    left: 10%;
+  }
+  50% {
+    left: 50%;
+  }
+  66.666% {
+    left: 70%;
+  }
+  83.333% {
+    left: 40%;
+  }
+}
+
+@keyframes updown {
+  0%,
+  100% {
+    top: 0px;
+    width: 20px;
+    height: 20px;
+  }
+  25% {
+    top: 70%;
+  }
+  50% {
+    top: 50%;
+    width: 30px;
+    height: 30px;
+  }
+  75% {
+    top: 70%;
+    width: 10px;
+    height: 10px;
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
