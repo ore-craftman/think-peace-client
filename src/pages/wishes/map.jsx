@@ -217,30 +217,6 @@ const exampleMapStyles = [
   },
 ];
 
-// const markers = [
-//   {
-//     id: 1,
-//     name: "Chicago, Illinois",
-//     position: { lat: 41.881832, lng: -87.623177 },
-//   },
-//   {
-//     id: 2,
-//     name: "Denver, Colorado",
-//     position: { lat: 39.739235, lng: -104.99025 },
-//   },
-//   {
-//     id: 3,
-//     name: "Los Angeles, California",
-//     position: { lat: 34.052235, lng: -118.243683 },
-//   },
-//   {
-//     id: 4,
-//     name: "New York, New York",
-//     position: { lat: 40.712776, lng: -74.005974 },
-//   },
-// ];
-
-//  {markers: {id: Number, name: String, position: {lat: Number, lng: Number}}[] }
 function Map({ markers }) {
   const [activeMarker, setActiveMarker] = useState(null);
 
@@ -275,6 +251,12 @@ function Map({ markers }) {
           key={_id}
           position={position}
           onClick={() => handleActiveMarker(_id)}
+          label={{
+            text: name,
+            color: "#000000",
+            fontWeight: "bold",
+            fontSize: "12px",
+          }}
         >
           {activeMarker === _id ? (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>

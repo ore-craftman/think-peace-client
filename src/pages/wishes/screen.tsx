@@ -14,6 +14,7 @@ const Notify = ({ message }: { message: string }) => {
 const Screen = () => {
   const colors = ["Yellow", "Gold", "Yellow", "Orange"];
   const navigate = useNavigate();
+  const [stack, setStack] = useState(true);
 
   const [wishNum, setWishNum] = useState(0);
   const [toToast, setToToast]: any = useState([]);
@@ -126,7 +127,7 @@ const Screen = () => {
           }}
         >
           <div className="relative">
-            <div className="flex justify-end pr-5 py-2 absolute right-0 top-0">
+            <div className="flex justify-end pr-5 py-3 absolute right-0 top-0">
               <label
                 htmlFor="default-toggle"
                 className="inline-flex relative items-center cursor-pointer"
@@ -143,57 +144,85 @@ const Screen = () => {
               </label>
             </div>
             <section className="px-6 py-12">
-              <div>
-                {toToast.length > 0 && (
-                  <>
-                    {toToast
-                      .filter((singleWish: any) => singleWish.from)
-                      .map((wish: any, idx: number) => (
-                        <div
-                          key={idx}
-                          className="bg-purple-700 py-4 px-6 rounded-md mb-3 text-lg notification-card"
-                        >
-                          <h4>{`Wish at ${moment(wish?.createdAt).format(
-                            "LT"
-                          )} on ${moment(wish?.createdAt)
-                            .subtract(10, "days")
-                            .calendar()} ${
-                            wish?.from?.fullAdress
-                              ? "from " + wish?.from?.fullAdress
-                              : "to " + wish?.to?.fullAdress
-                          }`}</h4>
-                        </div>
-                      ))}
-
-                    {toToast
-                      .filter((singleWish: any) => singleWish.to)
-                      .map((wish: any, idx: number) => (
-                        <div
-                          key={idx}
-                          className="bg-purple-700 py-4 px-6 rounded-md mb-3 text-lg notification-card"
-                        >
-                          <h4>{`Wish at ${moment(wish?.createdAt).format(
-                            "LT"
-                          )} on ${moment(wish?.createdAt)
-                            .subtract(10, "days")
-                            .calendar()} ${
-                            wish?.to?.fullAdress
-                              ? "to " + wish?.to?.fullAdress
-                              : "from " + wish?.to?.fullAdress
-                          }`}</h4>
-                        </div>
-                      ))}
-                  </>
+              <div className="mt-8">
+                {!stack && (
+                  <div className="flex justify-end mb-2">
+                    <button
+                      className="btn btn-circle border-white hover:bg-blue-600 btn-outline btn-sm"
+                      onClick={() => setStack(!stack)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="#fff"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 )}
-              </div>
+                <div
+                  className={`${stack ? "stack" : ""}`}
+                  onClick={() => setStack(!stack)}
+                >
+                  {toToast.length > 0 && (
+                    <>
+                      {toToast
+                        .filter((singleWish: any) => singleWish.from)
+                        .map((wish: any, idx: number) => (
+                          <div
+                            key={idx}
+                            className="bg-purple-700 py-4 px-6 rounded-md mb-3 text-lg notification-card"
+                          >
+                            <h4>{`Wish at ${moment(wish?.createdAt).format(
+                              "LT"
+                            )} on ${moment(wish?.createdAt)
+                              .subtract(10, "days")
+                              .calendar()} ${
+                              wish?.from?.fullAdress
+                                ? "from " + wish?.from?.fullAdress
+                                : "to " + wish?.to?.fullAdress
+                            }`}</h4>
+                          </div>
+                        ))}
 
-              {/* <div
+                      {toToast
+                        .filter((singleWish: any) => singleWish.to)
+                        .map((wish: any, idx: number) => (
+                          <div
+                            key={idx}
+                            className="bg-purple-700 shadow-2xl px-6 rounded-md mb-3 text-lg notification-card "
+                          >
+                            <h4>{`Wish at ${moment(wish?.createdAt).format(
+                              "LT"
+                            )} on ${moment(wish?.createdAt)
+                              .subtract(10, "days")
+                              .calendar()} ${
+                              wish?.to?.fullAdress
+                                ? "to " + wish?.to?.fullAdress
+                                : "from " + wish?.to?.fullAdress
+                            }`}</h4>
+                          </div>
+                        ))}
+                    </>
+                  )}
+                </div>
+
+                {/* <div
                 className="flex gap-2 justify-center absolute bottom-3 mt-8"
                 style={{ width: "88%" }}
               >
                 <div className="h-2 w-2 bg-white rounded-full"></div>
                 <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
               </div>*/}
+              </div>
             </section>
           </div>
         </div>

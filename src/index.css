@@ -34,28 +34,33 @@ code {
 
 .notification-card {
   position: relative;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgb(153, 153, 153);
   animation-name: notification-card-motion;
-  animation-duration: 2s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  /* animation-iteration-count: infinite; */
+  /* animation-direction: alternate; */
 }
 
 @keyframes notification-card-motion {
   0% {
-    top: -10px;
+    top: -50px;
     /* opacity: 0.6; */
   }
   25% {
-    top: -7px;
+    top: -10px;
     /* opacity: 0.8; */
   }
   50% {
-    top: -4px;
+    top: 10px;
     /* opacity: 0.9; */
   }
   25% {
-    top: 0px;
+    top: 2px;
     /* opacity: full; */
   }
 }
