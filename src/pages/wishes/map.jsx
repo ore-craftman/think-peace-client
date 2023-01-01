@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GoogleMap, InfoWindow, MarkerF } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, MarkerF, Marker } from "@react-google-maps/api";
 
 const exampleMapStyles = [
   {
@@ -226,7 +226,7 @@ function Map({ markers }) {
     }
     setActiveMarker(marker);
   };
-
+  console.log(activeMarker);
   const handleOnLoad = (map) => {
     const bounds = new window.google.maps.LatLngBounds();
     markers.forEach(({ position }) => bounds.extend(position));
@@ -251,16 +251,28 @@ function Map({ markers }) {
           key={_id}
           position={position}
           onClick={() => handleActiveMarker(_id)}
-          label={{
-            text: name,
-            color: "#000000",
-            fontWeight: "bold",
-            fontSize: "12px",
-          }}
+          //   label={{
+          //     text: name,
+          //     color: "#000000",
+          //     fontWeight: "bold",
+          //     fontSize: "12px",
+          //   }}
         >
           {activeMarker === _id ? (
-            <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>{name}</div>
+            <InfoWindow
+              onCloseClick={() => setActiveMarker(null)}
+              //   position={position}
+            >
+              <div
+                style={{
+                  background: `white`,
+                  padding: "2px 4px",
+                  color: "blue",
+                  fontWeight: "medium",
+                }}
+              >
+                {name}
+              </div>
             </InfoWindow>
           ) : null}
         </MarkerF>
