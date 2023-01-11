@@ -226,7 +226,8 @@ function Map({ markers }) {
     }
     setActiveMarker(marker);
   };
-  console.log(activeMarker);
+
+  //   console.log(activeMarker);
   const handleOnLoad = (map) => {
     const bounds = new window.google.maps.LatLngBounds();
     markers.forEach(({ position }) => bounds.extend(position));
