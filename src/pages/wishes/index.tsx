@@ -11,7 +11,7 @@ import {
   ButtonBack,
   ButtonNext,
 } from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
+
 import { useNavigate } from "react-router-dom";
 
 export const Wishes = () => {

@@ -88,26 +88,22 @@ export const LocationDetails = () => {
       fromAddress = `${sendToCity}, ${sendToState}, ${sendTo}`;
     }
 
-    // Handle Send to
-
     const payload = await {
       from: fromAddress.length > 0 ? fromAddress : sendFrom,
       to: sendTo,
       hashTag,
     };
 
-    console.log(payload);
+    axios
+      .post(endpoints.wish.CREATE, payload)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log("Err", error);
+      });
 
-    // axios
-    //   .post(endpoints.wish.CREATE, payload)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log("Err", error);
-    //   });
-
-    // navigate("/wishes");
+    navigate("/wishes");
   };
 
   return (
