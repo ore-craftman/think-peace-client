@@ -129,16 +129,16 @@ export const LocationDetails = () => {
 
     console.log({ payload });
 
-    // axios
-    //   .post(endpoints.wish.CREATE, payload)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log("Err", error);
-    //   });
+    axios
+      .post(endpoints.wish.CREATE, payload)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log("Err", error);
+      });
 
-    // navigate("/wishes");
+    navigate("/wishes");
   };
 
   return (

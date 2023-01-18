@@ -71,20 +71,27 @@ export const Wishes = () => {
           backgroundColor: "#10114C",
         }}
       >
-        <div className="flex justify-end pr-5 py-2">
-          <label
-            htmlFor="default-toggle"
-            className="inline-flex relative items-center cursor-pointer"
-          >
-            <input
-              type="checkbox"
-              value=""
-              id="default-toggle"
-              className="sr-only peer"
-              onClick={navHandler}
-            />
-            <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-          </label>
+        <div className="flex items-center justify-between">
+          <Link to="/wish">
+            <p className="text-sm btn bg-blue-500  text-gray-200 ml-2 mt-2">
+              Send a new wish
+            </p>
+          </Link>
+          <div className="flex justify-end pr-5 py-2">
+            <label
+              htmlFor="default-toggle"
+              className="inline-flex relative items-center cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                value=""
+                id="default-toggle"
+                className="sr-only peer"
+                onClick={navHandler}
+              />
+              <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
         </div>
         <div>
           {isLoaded && markers ? (
@@ -121,15 +128,6 @@ export const Wishes = () => {
                         <div className="h-2 w-2 bg-white rounded-full"></div>
                         <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
                       </div>
-
-                      <Link
-                        to="/wish"
-                        className="mx-auto mt-1 flex  justify-center"
-                      >
-                        <p className="text-sm text-center btn bg-white  text-gray-600">
-                          Send a new wish
-                        </p>
-                      </Link>
                     </div>
                   </Slide>
                   <Slide index={1}>
@@ -157,14 +155,6 @@ export const Wishes = () => {
                         <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
                         <div className="h-2 w-2 bg-white rounded-full"></div>
                       </div>
-                      <Link
-                        to="/wish"
-                        className="mx-auto mt-1 flex  justify-center"
-                      >
-                        <p className="text-sm text-center btn bg-white  text-gray-600">
-                          Send a new wish
-                        </p>
-                      </Link>
                     </div>
                   </Slide>
                 </Slider>
