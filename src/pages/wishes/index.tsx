@@ -12,7 +12,7 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Wishes = () => {
   const [showTo, setShowTo] = useState(false);
@@ -121,6 +121,15 @@ export const Wishes = () => {
                         <div className="h-2 w-2 bg-white rounded-full"></div>
                         <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
                       </div>
+
+                      <Link
+                        to="/wish"
+                        className="mx-auto mt-1 flex  justify-center"
+                      >
+                        <p className="text-sm text-center btn bg-white  text-gray-600">
+                          Send a new wish
+                        </p>
+                      </Link>
                     </div>
                   </Slide>
                   <Slide index={1}>
@@ -148,6 +157,14 @@ export const Wishes = () => {
                         <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
                         <div className="h-2 w-2 bg-white rounded-full"></div>
                       </div>
+                      <Link
+                        to="/wish"
+                        className="mx-auto mt-1 flex  justify-center"
+                      >
+                        <p className="text-sm text-center btn bg-white  text-gray-600">
+                          Send a new wish
+                        </p>
+                      </Link>
                     </div>
                   </Slide>
                 </Slider>

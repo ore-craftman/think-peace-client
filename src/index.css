@@ -118,6 +118,7 @@ ul.fireflies {
 }
 
 li {
+  z-index: 100;
   background-size: cover;
   background-image: url(http://i.imgur.com/aa7Rw.png);
   width: 25px;

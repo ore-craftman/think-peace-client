@@ -54,7 +54,7 @@ export const Welcome = () => {
           max="100"
         ></progress>
         {/* © All rights reserved */}
-        <p className="text-white text-sm mt-48">{`Think Peace © All rights reserved ${new Date().getFullYear()}`}</p>
+        <p className="text-white text-sm mt-48">{`Think Peace © All rights reserved ${new Date().getFullYear()}`}</p>
       </div>
     </Container>
   );

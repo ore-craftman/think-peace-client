@@ -12,62 +12,20 @@ import {
 } from "pure-react-carousel";
 import useSWR from "swr";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-
-const Notify = ({ message }: { message: string }) => {
-  return toast.success(message);
-};
+import { Link, useNavigate } from "react-router-dom";
 
 const Screen = () => {
-  const colors = ["Yellow", "Gold", "Yellow", "Orange"];
   const navigate = useNavigate();
   const [stack, setStack] = useState(true);
 
   const [wishNum, setWishNum] = useState(0);
   const [toToast, setToToast]: any = useState([]);
 
-  const toggleHandler = () => {
-    navigate("/wishes");
-  };
-
   // @ts-ignore
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, isLoading } = useSWR(endpoints.wish.GET_ALL, fetcher);
 
   useEffect(() => {
-    // if (data && data?.length >= 1) {
-    //   data.map((wish: any, idx: number) => {
-    //     toast.success(
-    //       `Wish at ${moment(data[wishNum]?.createdAt).format("LT")} on ${moment(
-    //         data[wishNum]?.createdAt
-    //       )
-    //         .subtract(10, "days")
-    //         .calendar()} ${
-    //         data[wishNum]?.from?.fullAdress
-    //           ? "from " + data[wishNum]?.from?.fullAdress
-    //           : "to " + data[wishNum]?.to?.fullAdress
-    //       }`
-    //     );
-    //   });
-    // }
-
-    // if (data && data?.length >= 1) {
-    //   for (let i = 0; i < data?.length; i++) {
-    //     const wish = data[i];
-    //     toast(
-    //   `Wish at ${moment(wish?.createdAt).format("LT")} on ${moment(
-    //     wish?.createdAt
-    //   )
-    //     .subtract(10, "days")
-    //     .calendar()} from ${wish?.from?.fullAdress}`,
-    //       { duration: 4000 }
-    //     );
-    //     toast(`Wish at 1:37 pm on 9/16/2022 to ${wish?.from?.fullAdress}`, {
-    //       duration: 6000,
-    //     });
-    //   }
-    // }
-
     if (data && data?.length >= 1) {
       setToToast([...toToast, data[wishNum]]);
 
@@ -106,8 +64,6 @@ const Screen = () => {
         </div>
       </Container>
     );
-
-  console.log(toToast);
 
   return (
     <div className="h-screen">
@@ -159,7 +115,7 @@ const Screen = () => {
                     </label>
                   </div>
                   <section className="px-6 py-12">
-                    <h1 className="text-2xl">Where Wishes Are Comming From</h1>
+                    <h1 className="text-2xl">Where Wishes Are Coming From</h1>
                     <div className="mt-8">
                       {!stack && (
                         <div className="flex justify-end mb-2">
@@ -214,12 +170,23 @@ const Screen = () => {
                     </div>
                   </section>
                 </div>
-                <div
-                  className="flex gap-2 justify-center absolute bottom-24"
-                  style={{ width: "100%" }}
-                >
-                  <div className="h-2 w-2 bg-white rounded-full"></div>
-                  <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
+                <div className="absolute bottom-24 w-full">
+                  <div
+                    className="flex gap-2 justify-center "
+                    style={{ width: "100%" }}
+                  >
+                    <div className="h-2 w-2 bg-white rounded-full"></div>
+                    <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
+                  </div>
+
+                  <Link
+                    to="/wish"
+                    className="mx-auto mt-1 flex  justify-center"
+                  >
+                    <p className="text-sm text-center btn bg-white  text-gray-600">
+                      Send a new wish
+                    </p>
+                  </Link>
                 </div>
               </div>
             </Container>
@@ -320,12 +287,24 @@ const Screen = () => {
                     </div>
                   </section>
                 </div>
-                <div
-                  className="flex gap-2 justify-center absolute bottom-24"
-                  style={{ width: "100%" }}
-                >
-                  <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
-                  <div className="h-2 w-2 bg-white rounded-full"></div>
+
+                <div className="absolute bottom-24 w-full">
+                  <div
+                    className="flex gap-2 justify-center "
+                    style={{ width: "100%" }}
+                  >
+                    <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
+                    <div className="h-2 w-2 bg-white rounded-full"></div>
+                  </div>
+
+                  <Link
+                    to="/wish"
+                    className="mx-auto mt-1  flex  justify-center"
+                  >
+                    <p className="text-sm text-center btn bg-white  text-gray-600">
+                      Send a new wish
+                    </p>
+                  </Link>
                 </div>
               </div>
             </Container>

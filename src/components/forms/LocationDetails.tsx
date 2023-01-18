@@ -14,8 +14,9 @@ export const LocationDetails = () => {
   const allCities = City.getAllCities();
 
   const [hashTag, setHashTag] = useState("#peace");
-  const [sendToOptions, setSendToOptions] = useState(allContinents);
-  const [commingFromOptions, setCommingFromOptions] = useState(allContinents);
+  const [sendToOptions, setSendToOptions]: any = useState(allContinents);
+  const [commingFromOptions, setCommingFromOptions]: any =
+    useState(allContinents);
 
   const [sendFrom, setSendFrom] = useState(allContinents[0]);
   const [sendTo, setSendTo] = useState(allContinents[0]);
@@ -33,22 +34,17 @@ export const LocationDetails = () => {
     return;
   };
 
+  const [commingFromMainOpt, setCommingFromMainOpt] = useState("");
+
   const commingFromOptionHandler = (e: React.ChangeEvent<any>) => {
-    switch (e.target.value.toLowerCase()) {
-      case "country":
-        setCommingFromOptions(
-          allCountries.map((details: any) => details?.name)
-        );
-        break;
-      case "state":
-        setCommingFromOptions(allStates.map((details: any) => details?.name));
-        break;
-      case "city":
-        setCommingFromOptions(allCities.map((details: any) => details?.name));
-        break;
-      default:
-        setCommingFromOptions(allContinents);
+    setCommingFromMainOpt(e.target.value);
+    // console.log(e.target.value);
+    if (e.target.value.toLowerCase() === "continent") {
+      setCommingFromOptions(allContinents);
+    } else if (e.target.value.toLowerCase() !== "continent") {
+      setCommingFromOptions(allCountries.map((details: any) => details?.name));
     }
+    return;
   };
 
   const navigate = useNavigate();
@@ -69,41 +65,80 @@ export const LocationDetails = () => {
     }
   }, [sendToMainOpt, sendTo]);
 
+  const [commingFromStateOpts, setCommingFromStateOpts]: any = useState(null);
+  const [commingFromState, setCommingFromState]: any = useState(null);
+  const [commingFromCity, setCommingFromCity] = useState("");
+
+  useEffect(() => {
+    if (commingFromMainOpt !== "continent") {
+      const selectedCountry = allCountries.filter(
+        (details) => details.name.toLowerCase() === sendFrom.toLowerCase()
+      );
+
+      setCommingFromStateOpts(
+        State.getStatesOfCountry(selectedCountry[0]?.isoCode)
+      );
+
+      setCommingFromState(
+        State.getStatesOfCountry(selectedCountry[0]?.isoCode)[0]?.name
+      );
+    }
+  }, [commingFromMainOpt, sendFrom]);
+
   const submitHandler = async (e: React.ChangeEvent<any>) => {
     e.preventDefault();
 
-    if (sendToMainOpt === "planets") navigate("/wishes/screen");
+    if (sendToMainOpt === "planets" || commingFromMainOpt === "planets")
+      navigate("/wishes/screen");
 
-    let fromAddress = "";
+    let sendToAddress = "";
 
     if (sendToMainOpt === "continent" || sendToMainOpt === "country") {
-      fromAddress = sendTo;
+      sendToAddress = sendTo;
     }
 
     if (sendToMainOpt === "state") {
-      fromAddress = `${sendToState}, ${sendTo}`;
+      sendToAddress = `${sendToState}, ${sendTo}`;
     }
 
     if (sendToMainOpt === "city") {
-      fromAddress = `${sendToCity}, ${sendToState}, ${sendTo}`;
+      sendToAddress = `${sendToCity}, ${sendToState}, ${sendTo}`;
+    }
+
+    let commingFromAddress = "";
+    if (
+      commingFromMainOpt === "continent" ||
+      commingFromMainOpt === "country"
+    ) {
+      commingFromAddress = sendFrom;
+    }
+
+    if (commingFromMainOpt === "state") {
+      commingFromAddress = `${commingFromState}, ${sendFrom}`;
+    }
+
+    if (commingFromMainOpt === "city") {
+      commingFromAddress = `${commingFromCity}, ${commingFromState}, ${sendFrom}`;
     }
 
     const payload = await {
-      from: fromAddress.length > 0 ? fromAddress : sendFrom,
-      to: sendTo,
+      from: commingFromAddress.length > 0 ? commingFromAddress : sendFrom,
+      to: sendToAddress.length > 0 ? sendToAddress : sendTo,
       hashTag,
     };
 
-    axios
-      .post(endpoints.wish.CREATE, payload)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log("Err", error);
-      });
+    console.log({ payload });
 
-    navigate("/wishes");
+    // axios
+    //   .post(endpoints.wish.CREATE, payload)
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log("Err", error);
+    //   });
+
+    // navigate("/wishes");
   };
 
   return (
@@ -202,6 +237,84 @@ export const LocationDetails = () => {
             Coming from
           </label>
           <select
+            className="select  mt-1 w-full max-w-xs bg-white text-gray-700"
+            onChange={commingFromOptionHandler}
+          >
+            <option value="continent">Continent</option>
+            <option value="country">Country</option>
+            <option value="state">State</option>
+            <option value="city">City</option>
+            <option value="planets">Planets and Above</option>
+          </select>
+
+          {commingFromMainOpt === "planets" ? (
+            <select className="select  mt-1 w-full max-w-xs bg-white text-gray-700">
+              {["Earth", "Heaven", "Sky", "Stars", "Universe"].map((opt) => (
+                <option key={opt}>{opt}</option>
+              ))}
+            </select>
+          ) : null}
+
+          {commingFromMainOpt !== "planets" ? (
+            <div className="flex justify-between w-full max-w-xs gap-x-1">
+              <select
+                className={`select mt-2 ${
+                  commingFromMainOpt.toLowerCase() === "state" ||
+                  commingFromMainOpt === "city"
+                    ? "w-1/2"
+                    : "w-full"
+                } bg-white text-gray-700`}
+                value={sendFrom}
+                onChange={(e: any) => setSendFrom(e.target.value)}
+              >
+                <>
+                  {commingFromMainOpt.toLowerCase() === "country" ||
+                  commingFromMainOpt.toLowerCase() === "state" ||
+                  commingFromMainOpt.toLowerCase() === "city" ? (
+                    <option>Select country</option>
+                  ) : null}
+
+                  {commingFromOptions.map((opt: string, idx: number) => (
+                    <option value={opt.toLowerCase()} key={idx}>
+                      {opt}
+                    </option>
+                  ))}
+                </>
+              </select>
+
+              {commingFromOptions &&
+              (commingFromMainOpt === "state" ||
+                commingFromMainOpt === "city") ? (
+                <select
+                  className={`select mt-2 ${
+                    commingFromMainOpt === "state" ||
+                    commingFromMainOpt === "city"
+                      ? "w-1/2"
+                      : "w-full"
+                  } bg-white text-gray-700`}
+                  value={commingFromState}
+                  onChange={(e: any) => setCommingFromState(e.target.value)}
+                >
+                  {commingFromStateOpts?.map((stateObj: any, idx: number) => (
+                    <option value={stateObj?.name?.toLowerCase()} key={idx}>
+                      {stateObj.name}
+                    </option>
+                  ))}
+                </select>
+              ) : null}
+            </div>
+          ) : null}
+          {commingFromMainOpt === "city" ? (
+            <input
+              type="text"
+              className="input w-full max-w-xs text-black bg-white mt-2"
+              placeholder="Enter city..."
+              value={commingFromCity}
+              onChange={(e: any) => setCommingFromCity(e.target.value)}
+            />
+          ) : null}
+
+          {/* <select
             className="select mt-1 w-full max-w-xs bg-white text-gray-700"
             onChange={commingFromOptionHandler}
           >
@@ -209,9 +322,9 @@ export const LocationDetails = () => {
             <option value="country">Country</option>
             <option value="state">State</option>
             <option value="city">City</option>
-          </select>
+          </select> */}
 
-          <select
+          {/* <select
             className="select mt-2 w-full max-w-xs bg-white text-gray-700"
             value={sendFrom}
             onChange={(e: any) => setSendFrom(e.target.value)}
@@ -221,7 +334,7 @@ export const LocationDetails = () => {
                 {opt}
               </option>
             ))}
-          </select>
+          </select> */}
         </section>
 
         <section className="my-2 flex flex-col items-center">
