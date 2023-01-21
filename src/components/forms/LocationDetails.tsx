@@ -1,17 +1,17 @@
-import { Country, State, City } from "country-state-city";
+import { Country, State } from "country-state-city";
 import { continents } from "countries-list";
 import { useEffect, useState } from "react";
-import { useGeocode } from "hooks/useGeocode";
+// import { useGeocode } from "hooks/useGeocode";
 import axios from "axios";
 import { endpoints } from "constants/endpoints";
 import { useNavigate } from "react-router-dom";
 
 export const LocationDetails = () => {
-  const { getCoordinates } = useGeocode();
+  // const { getCoordinates } = useGeocode();
   const allContinents = Object.values(continents);
   const allCountries = Country.getAllCountries();
-  const allStates = State.getAllStates();
-  const allCities = City.getAllCities();
+  // const allStates = State.getAllStates();
+  // const allCities = City.getAllCities();
 
   const [hashTag, setHashTag] = useState("#peace");
   const [sendToOptions, setSendToOptions]: any = useState(allContinents);
@@ -63,6 +63,8 @@ export const LocationDetails = () => {
         State.getStatesOfCountry(selectedCountry[0]?.isoCode)[0]?.name
       );
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sendToMainOpt, sendTo]);
 
   const [commingFromStateOpts, setCommingFromStateOpts]: any = useState(null);
@@ -83,13 +85,14 @@ export const LocationDetails = () => {
         State.getStatesOfCountry(selectedCountry[0]?.isoCode)[0]?.name
       );
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commingFromMainOpt, sendFrom]);
 
+  const [sendToPlanetOpt, setSendToPlanetOpt] = useState("Earth");
+  const [comingFromPlanetOpt, setComingFromPlanetOpt] = useState("Earth");
   const submitHandler = async (e: React.ChangeEvent<any>) => {
     e.preventDefault();
-
-    if (sendToMainOpt === "planets" || commingFromMainOpt === "planets")
-      navigate("/wishes/screen");
 
     let sendToAddress = "";
 
@@ -122,8 +125,11 @@ export const LocationDetails = () => {
     }
 
     const payload = await {
-      from: commingFromAddress.length > 0 ? commingFromAddress : sendFrom,
-      to: sendToAddress.length > 0 ? sendToAddress : sendTo,
+      from:
+        commingFromAddress.length > 0
+          ? commingFromAddress
+          : comingFromPlanetOpt,
+      to: sendToAddress.length > 0 ? sendToAddress : sendToPlanetOpt,
       hashTag,
     };
 
@@ -138,7 +144,9 @@ export const LocationDetails = () => {
         console.log("Err", error);
       });
 
-    navigate("/wishes");
+    if (sendToMainOpt === "planets" && commingFromMainOpt === "planets")
+      navigate("/wishes/screen");
+    else navigate("/wishes");
   };
 
   return (
@@ -163,7 +171,10 @@ export const LocationDetails = () => {
           </select>
 
           {sendToMainOpt === "planets" ? (
-            <select className="select  mt-1 w-full max-w-xs bg-white text-gray-700">
+            <select
+              className="select  mt-1 w-full max-w-xs bg-white text-gray-700"
+              onChange={(e: any) => setSendToPlanetOpt(e.target.value)}
+            >
               {["Earth", "Heaven", "Sky", "Stars", "Universe"].map((opt) => (
                 <option key={opt}>{opt}</option>
               ))}
@@ -187,7 +198,9 @@ export const LocationDetails = () => {
                   sendToMainOpt.toLowerCase() === "state" ||
                   sendToMainOpt.toLowerCase() === "city" ? (
                     <option>Select country</option>
-                  ) : null}
+                  ) : sendToMainOpt.toLowerCase() === "planets" ? null : (
+                    <option>Select countinent</option>
+                  )}
 
                   {sendToOptions.map((opt: string, idx: number) => (
                     <option value={opt.toLowerCase()} key={idx}>
@@ -248,7 +261,10 @@ export const LocationDetails = () => {
           </select>
 
           {commingFromMainOpt === "planets" ? (
-            <select className="select  mt-1 w-full max-w-xs bg-white text-gray-700">
+            <select
+              className="select  mt-1 w-full max-w-xs bg-white text-gray-700"
+              onChange={(e: any) => setComingFromPlanetOpt(e.target.value)}
+            >
               {["Earth", "Heaven", "Sky", "Stars", "Universe"].map((opt) => (
                 <option key={opt}>{opt}</option>
               ))}
@@ -272,7 +288,9 @@ export const LocationDetails = () => {
                   commingFromMainOpt.toLowerCase() === "state" ||
                   commingFromMainOpt.toLowerCase() === "city" ? (
                     <option>Select country</option>
-                  ) : null}
+                  ) : commingFromMainOpt.toLowerCase() === "planets" ? null : (
+                    <option>Select continent</option>
+                  )}
 
                   {commingFromOptions.map((opt: string, idx: number) => (
                     <option value={opt.toLowerCase()} key={idx}>
