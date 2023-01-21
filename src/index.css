@@ -190,6 +190,10 @@ li:nth-of-type(5) {
     height: 10px;
   }
 }
+.single_slide {
+  height: 100% !important;
+  overflow-y: auto !important;
+}
 
 @tailwind base;
 @tailwind components;

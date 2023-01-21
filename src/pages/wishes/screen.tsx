@@ -61,17 +61,18 @@ const Screen = () => {
     );
 
   return (
-    <div className="h-screen">
+    <div className="min-h-screen">
       <audio autoPlay loop>
         <source src="/assets/sounds/firefly.mp3" type="audio/mpeg" />
       </audio>
+
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={190}
         totalSlides={2}
       >
         <Slider>
-          <Slide index={0}>
+          <Slide index={0} className="single_slide">
             <Container overflow={true}>
               {toToast.length > 0 ? (
                 <ul className="fireflies">
@@ -83,7 +84,7 @@ const Screen = () => {
                 <div></div>
               )}
               <div
-                className="h-screen text-white relative"
+                className="min-h-screen text-white relative"
                 style={{
                   backgroundColor: "#10114C",
                   // backgroundImage: "url('/assets/background.svg')",
@@ -184,8 +185,7 @@ const Screen = () => {
               </div>
             </Container>
           </Slide>
-
-          <Slide index={1}>
+          <Slide index={1} className="single_slide">
             <Container overflow={true}>
               {toToast.length > 0 ? (
                 <ul className="fireflies">
@@ -196,7 +196,6 @@ const Screen = () => {
               ) : (
                 <div></div>
               )}
-
               <div
                 className="min-h-screen text-white relative"
                 style={{
@@ -287,7 +286,6 @@ const Screen = () => {
                     </div>
                   </section>
                 </div>
-
                 <div className="absolute bottom-24 w-full">
                   <div
                     className="flex gap-2 justify-center "
