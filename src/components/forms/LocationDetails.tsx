@@ -199,7 +199,7 @@ export const LocationDetails = () => {
                   sendToMainOpt.toLowerCase() === "city" ? (
                     <option>Select country</option>
                   ) : sendToMainOpt.toLowerCase() === "planets" ? null : (
-                    <option>Select countinent</option>
+                    <option>Select continent</option>
                   )}
 
                   {sendToOptions.map((opt: string, idx: number) => (

@@ -27,7 +27,16 @@ export const Wishes = () => {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, isLoading } = useSWR(endpoints.wish.GET_ALL, fetcher);
   useEffect(() => {
-    if (data) setMarkers(data);
+    if (data)
+      setMarkers(
+        data.filter(
+          (dt: any) =>
+            dt?.from?.position?.lat &&
+            dt?.from?.position?.lng &&
+            dt?.to?.position?.lat &&
+            dt?.to?.position?.lng
+        )
+      );
     return;
   }, [data]);
 
@@ -40,6 +49,7 @@ export const Wishes = () => {
   //     const timeOut = window.setTimeout(() => navHandler(), 10000 * 2);
   //     return () => window.clearTimeout(timeOut);
   //   }, []);
+
   if (error)
     return (
       <Container>
