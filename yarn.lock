@@ -4544,11 +4544,6 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
-firefly-react@^22.5.0:
-  version "22.5.0"
-  resolved "https://registry.yarnpkg.com/firefly-react/-/firefly-react-22.5.0.tgz#d4923f30ded9c637e85498c34ca8b3e7be579157"
-  integrity sha512-3S/sH0FAqSbaWBuW3DFaKw7FjlCJE4i3dkaCTLGSbntzNhaGhlfZr2Z/+8eGQmGZ05/RsOSXAZxhXSqGccHuuA==
-
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.npmjs.org/flat-cache/-/flat-cache-3.0.4.tgz"

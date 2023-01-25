@@ -23,7 +23,7 @@ export const LocationDetails = () => {
   const [sendToState, setSendToState]: any = useState(null);
   const [sendToCity, setSendToCity] = useState("");
 
-  const [sendToMainOpt, setSendToMainOpt] = useState("");
+  const [sendToMainOpt, setSendToMainOpt] = useState("continent");
   const sendToOptionHandler = (e: React.ChangeEvent<any>) => {
     setSendToMainOpt(e.target.value);
     if (e.target.value.toLowerCase() === "continent") {
@@ -34,7 +34,7 @@ export const LocationDetails = () => {
     return;
   };
 
-  const [commingFromMainOpt, setCommingFromMainOpt] = useState("");
+  const [commingFromMainOpt, setCommingFromMainOpt] = useState("continent");
 
   const commingFromOptionHandler = (e: React.ChangeEvent<any>) => {
     setCommingFromMainOpt(e.target.value);
@@ -91,6 +91,7 @@ export const LocationDetails = () => {
 
   const [sendToPlanetOpt, setSendToPlanetOpt] = useState("Earth");
   const [comingFromPlanetOpt, setComingFromPlanetOpt] = useState("Earth");
+
   const submitHandler = async (e: React.ChangeEvent<any>) => {
     e.preventDefault();
 
@@ -133,8 +134,6 @@ export const LocationDetails = () => {
       hashTag,
     };
 
-    console.log({ payload });
-
     axios
       .post(endpoints.wish.CREATE, payload)
       .then((response) => {
@@ -166,7 +165,7 @@ export const LocationDetails = () => {
             <option value="continent">Continent</option>
             <option value="country">Country</option>
             <option value="state">State</option>
-            <option value="city">City</option>
+            {/* <option value="city">City</option> */}
             <option value="planets">Planets and Above</option>
           </select>
 
@@ -256,7 +255,7 @@ export const LocationDetails = () => {
             <option value="continent">Continent</option>
             <option value="country">Country</option>
             <option value="state">State</option>
-            <option value="city">City</option>
+            {/* <option value="city">City</option> */}
             <option value="planets">Planets and Above</option>
           </select>
 
@@ -331,28 +330,6 @@ export const LocationDetails = () => {
               onChange={(e: any) => setCommingFromCity(e.target.value)}
             />
           ) : null}
-
-          {/* <select
-            className="select mt-1 w-full max-w-xs bg-white text-gray-700"
-            onChange={commingFromOptionHandler}
-          >
-            <option value="continent">Continent</option>
-            <option value="country">Country</option>
-            <option value="state">State</option>
-            <option value="city">City</option>
-          </select> */}
-
-          {/* <select
-            className="select mt-2 w-full max-w-xs bg-white text-gray-700"
-            value={sendFrom}
-            onChange={(e: any) => setSendFrom(e.target.value)}
-          >
-            {commingFromOptions.map((opt: string, idx: number) => (
-              <option value={opt.toLowerCase()} key={idx}>
-                {opt}
-              </option>
-            ))}
-          </select> */}
         </section>
 
         <section className="my-2 flex flex-col items-center">
@@ -367,11 +344,13 @@ export const LocationDetails = () => {
             value={hashTag}
             onChange={(e) => setHashTag(e.target.value)}
           >
-            {["#peace", "#love", "#support", "#prayers", "#hope"].map((tag) => (
-              <option value={tag} key={tag}>
-                {tag}
-              </option>
-            ))}
+            {["#peace", "#love", "#support", "#prayers", "#hope", "#faith"].map(
+              (tag) => (
+                <option value={tag} key={tag}>
+                  {tag}
+                </option>
+              )
+            )}
           </select>
         </section>
 
