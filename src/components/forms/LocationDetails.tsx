@@ -171,7 +171,7 @@ export const LocationDetails = () => {
 
           {sendToMainOpt === "planets" ? (
             <select
-              className="select  mt-1 w-full max-w-xs bg-white text-gray-700"
+              className="select mt-1 w-full max-w-xs bg-white text-gray-700"
               onChange={(e: any) => setSendToPlanetOpt(e.target.value)}
             >
               {["Earth", "Heaven", "Sky", "Stars", "Universe"].map((opt) => (
@@ -189,6 +189,7 @@ export const LocationDetails = () => {
                     ? "w-1/2"
                     : "w-full"
                 } bg-white text-gray-700`}
+                required
                 value={sendTo}
                 onChange={(e: any) => setSendTo(e.target.value)}
               >
@@ -196,9 +197,9 @@ export const LocationDetails = () => {
                   {sendToMainOpt.toLowerCase() === "country" ||
                   sendToMainOpt.toLowerCase() === "state" ||
                   sendToMainOpt.toLowerCase() === "city" ? (
-                    <option>Select country</option>
+                    <option value=''>Select country</option>
                   ) : sendToMainOpt.toLowerCase() === "planets" ? null : (
-                    <option>Select continent</option>
+                    <option value=''>Select continent</option>
                   )}
 
                   {sendToOptions.map((opt: string, idx: number) => (
