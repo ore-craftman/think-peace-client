@@ -337,7 +337,7 @@ export const LocationDetails = () => {
             htmlFor="wishto"
             className="text-white text-lg pl-2 sm:pl-4 md:pl-10 w-full"
           >
-            Wish
+            What did you wish for?
           </label>
           <select
             className="select mt-1 w-full max-w-xs bg-white text-gray-700"
