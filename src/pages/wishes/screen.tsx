@@ -31,9 +31,6 @@ const Screen = () => {
       }, 4000);
     }
 
-    var audio = new Audio("/sounds/firefly.mp3");
-    audio.play();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, wishNum]);
 
