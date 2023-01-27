@@ -5,9 +5,12 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import Tappable from "react-tappable";
 import { Location } from "components/modals/Location";
 import { Vibration } from "components/partials/Vibration";
+import useWindowDimensions from "hooks/windowDimensions";
 
 export const Wish = () => {
   const [initVibration, setInitVibration]: any = useState(null);
+  const isNotMobile = useWindowDimensions()?.width > 425;
+
   const initVib = () => {
     setInitVibration(initVibration ? false : true);
   };
@@ -22,6 +25,8 @@ export const Wish = () => {
     }
     return;
   }, [initVibration]);
+
+  console.log(isNotMobile);
   return (
     <Container>
       <Location open={initVibration === false} />
@@ -40,9 +45,15 @@ export const Wish = () => {
             className="h-full py-4 px-6 flex flex-col items-center justify-center"
             style={{ backgroundColor: "#10114C" }}
           >
-            <h4 className="text-2xl text-white text-center">
-              Hi! Touch and hold the screen to send a wish for peace.
-            </h4>
+            {isNotMobile ? (
+              <h4 className="text-2xl text-white text-center">
+                Hi! Double tap the screen to send a wish for peace.
+              </h4>
+            ) : (
+              <h4 className="text-2xl text-white text-center">
+                Hi! Touch and hold the screen to send a wish for peace.
+              </h4>
+            )}
           </div>
         ) : (
           <div
