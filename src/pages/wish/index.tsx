@@ -26,7 +26,6 @@ export const Wish = () => {
     return;
   }, [initVibration]);
 
-  console.log(isNotMobile);
   return (
     <Container>
       <Location open={initVibration === false} />
