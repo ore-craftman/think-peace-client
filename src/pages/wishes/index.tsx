@@ -83,7 +83,7 @@ export const Wishes = () => {
       >
         <div className="flex items-center justify-between">
           <Link to="/wish">
-            <p className="text-sm btn bg-blue-500  text-gray-200 ml-2 mt-2">
+            <p className="text-sm btn bg-blue-500 rounded-3xl  text-gray-200 ml-2 mt-2">
               Send a new wish
             </p>
           </Link>
